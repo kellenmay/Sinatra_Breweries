@@ -1,4 +1,4 @@
-require 'pry'
+# require 'pry'
 
 require 'bundler' #this will load the Gemfile
 Bundler.require #run bundle and gemfile.lock will show it worked

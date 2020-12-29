@@ -1,5 +1,11 @@
 #communitation class between user and API data 
 
+
+git init
+git add .
+git commit -m write a commit message
+git push
+
 class CLI
     
 
@@ -21,8 +27,11 @@ class CLI
     end
 
     def list
+        puts "Where would you like to go?"
         selection = user_input
-        Brewery.find_brewery(selection)
+
+        puts "#{selection}"
+        # Brewery.find_brewery(selection)
 
         if selection == 'y'
             brewery_list
@@ -56,6 +65,20 @@ class CLI
 
         puts "Select a brewery for more detail!"
     end
+
+    def menu 
+        selection = user_input 
+
+        if selection == 'y' 
+            starships_list
+            menu 
+        elsif selection == 'exit'
+            goodbye
+        else 
+            invalid
+        end 
+
+    end 
 
 
 

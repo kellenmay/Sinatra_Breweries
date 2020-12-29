@@ -25,6 +25,8 @@ class Breweries
     def self.find_brewery(brewery_name)
         self.all.find do |brewery|
             brewery.name == brewery_name
+        end
+    end
 
 
 
