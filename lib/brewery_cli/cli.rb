@@ -1,17 +1,21 @@
 #communitation class between user and API data 
 
 
-git init
-git add .
-git commit -m write a commit message
-git push
+# git init
+# git add .
+# git commit -m update
+# git push
 
 class CLI
+
+
     
 
     def start
+      
         puts "Here is a list of microbreweries, trying to find one nearby?"
         puts "Let's start with your name:"
+        API.get_data
         greet(user_input)
 
     end

@@ -1,17 +1,24 @@
-class Breweries
-
+class Brewery
 
     @@all = []
 
 
-    attr_accessor :name, :town, :state
+    attr_accessor :name, :city, :state
 
-    def initialize(name, town, state)
-        @name = name
-        @town = town
-        @state = state
-        save
+    # def initialize(name, city, state)
+    #     @name = name
+    #     @city = city
+    #     @state = state
+    #     save
+    # end
+
+    def initialize(brewery_hash)
+        brewery_hash.each do |k, v|
+            self.send("#{k}=", v) if self.respond_to?("#{k}=")
+       end 
+            save
     end
+
 
     def save #each new object is saved in the @@all array
         @@all << self
@@ -27,14 +34,6 @@ class Breweries
             brewery.name == brewery_name
         end
     end
-
-
-
-
-
-
-
-
 
 
 
