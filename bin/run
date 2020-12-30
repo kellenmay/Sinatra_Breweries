@@ -11,4 +11,6 @@ require_relative '../environment'
 
 # refactored above code
 
+API.get_data
+
 CLI.new.start

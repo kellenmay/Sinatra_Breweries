@@ -8,16 +8,10 @@
 
 class CLI
 
-
-    
-
     def start
-      
         puts "Here is a list of microbreweries, trying to find one nearby?"
         puts "Let's start with your name:"
-        API.get_data
         greet(user_input)
-
     end
 
     def user_input
@@ -29,17 +23,23 @@ class CLI
         puts "Input 'y' to see the breweries, 'exit' if you've made a decision."
         list
     end
+    
+    def sorted_city
+        states = Brewery.all.uniq{|brewery| brewery.city}
+        sorted = states.sort_by{|brewery| brewery.city}
+    end
 
     def list
-        puts "Where would you like to go?"
+        
         selection = user_input
 
         puts "#{selection}"
         # Brewery.find_brewery(selection)
 
         if selection == 'y'
-            brewery_list
-            menu
+            brewery_city
+            puts "Where would you like to go?"
+            city_select
             #print list of breweries
         elsif selection == 'exit'
             #puts a goodbye statement
@@ -51,10 +51,28 @@ class CLI
         end
     end
 
-    def brewery_list
-        ["brewery1", "brewery2", "brewery3"].each.with_index(1) do |brewery, i|
-        puts "#{i}. #{brewery}"
+    def brewery_name
+        Brewery.all.each.with_index(1) do |brewery, i|
+            puts "#{i}. #{brewery.name}"
+         end
     end
+
+    def brewery_city
+        sorted_city.each.with_index(1) do |brewery, i|
+            puts "#{i}. #{brewery.city}"
+         end
+    end
+
+    def city_select
+        input = gets.strip.to_i
+        if input.between?(1, sorted_city.count)
+            @selected_city = sorted_city[input - 1]
+        else
+            puts "Sorry"
+            brewery_city
+        end
+        binding.pry
+
     end
 
     def goodbye
@@ -69,13 +87,32 @@ class CLI
 
         puts "Select a brewery for more detail!"
     end
+    
+    def brewery_selection
+        puts "Select a brewery for more detail"
+
+        selection = user_input 
+        brewery = brewery.find_brewery(selection)
+        brewery_details(brewery)
+        # we'll query our brewery class to find the brewery's detail 
+    end 
+
+    def brewery_details(brewery)
+        puts ""
+        puts ""
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts "Name: #{brewery.name}"
+        puts "city: #{brewery.city}"
+        puts "State: #{brewery.state}"
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        menu
+    end 
 
     def menu 
         selection = user_input 
 
         if selection == 'y' 
-            starships_list
-            menu 
+            brewery_name
         elsif selection == 'exit'
             goodbye
         else 
