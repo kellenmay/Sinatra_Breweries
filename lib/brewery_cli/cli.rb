@@ -23,24 +23,28 @@ class CLI
         puts "Input 'y' to see the breweries, 'exit' if you've made a decision."
         list
     end
-    
-    def sorted_city
-        states = Brewery.all.uniq{|brewery| brewery.city}
-        sorted = states.sort_by{|brewery| brewery.city}
-    end
+
+    def menu 
+        selection = user_input 
+        if selection == 'y' 
+            brewery_name
+        elsif selection == 'exit'
+            goodbye
+        else 
+            invalid
+        end 
+    end 
 
     def list
-        
         selection = user_input
-
         puts "#{selection}"
         # Brewery.find_brewery(selection)
-
         if selection == 'y'
             brewery_city
             puts "Where would you like to go?"
             city_select
-            #print list of breweries
+            display_breweries
+            #print the brewery (and address in that city)
         elsif selection == 'exit'
             #puts a goodbye statement
             goodbye
@@ -52,7 +56,7 @@ class CLI
     end
 
     def brewery_name
-        Brewery.all.each.with_index(1) do |brewery, i|
+        Brewery.each.with_index(1) do |brewery, i|
             puts "#{i}. #{brewery.name}"
          end
     end
@@ -63,30 +67,27 @@ class CLI
          end
     end
 
+    def sorted_city
+        cities = Brewery.all.uniq{|brewery| brewery.city}
+        sorted = cities.sort_by{|brewery| brewery.city}
+    end        
+
     def city_select
         input = gets.strip.to_i
         if input.between?(1, sorted_city.count)
             @selected_city = sorted_city[input - 1]
+            # binding.pry
         else
             puts "Sorry"
             brewery_city
         end
-        binding.pry
-
     end
 
-    def goodbye
-        puts "See you there!"
-    end
-
-    def invalid
-        puts "Cheers, but I think you made a typo there!"
-    end
-
-    def brewery_selection
-
-        puts "Select a brewery for more detail!"
-    end
+    def display_breweries
+        Brewery.town_breweries(@selected_city.city).each.with_index(1) do |brewery, i|
+            puts "#{i}. #{brewery.name}"
+        end
+    end 
     
     def brewery_selection
         puts "Select a brewery for more detail"
@@ -103,23 +104,22 @@ class CLI
         puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         puts "Name: #{brewery.name}"
         puts "city: #{brewery.city}"
-        puts "State: #{brewery.state}"
+        # puts "State: #{brewery.state}"
         puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         menu
-    end 
+    end
 
-    def menu 
-        selection = user_input 
+    def goodbye
+        puts "See you there!"
+    end
 
-        if selection == 'y' 
-            brewery_name
-        elsif selection == 'exit'
-            goodbye
-        else 
-            invalid
-        end 
+    def invalid
+        puts "Cheers, but I think you made a typo there!"
+    end
 
-    end 
+    def brewery_selection
+        puts "Select a brewery for more detail!"
+    end
 
 
 

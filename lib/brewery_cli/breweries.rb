@@ -28,7 +28,9 @@ class Brewery
         @@all
     end
 
-    
+    def self.town_breweries(city)
+        self.all.select{|brewery| brewery.city == city}
+    end
 
     def self.find_brewery(brewery_name)
         self.all.find do |brewery|
