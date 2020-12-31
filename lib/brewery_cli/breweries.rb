@@ -3,11 +3,12 @@ class Brewery
     @@all = []
 
 
-    attr_accessor :name, :city
+    attr_accessor :name, :city, :street
 
-    def initialize(name, city)
+    def initialize(name, city, street)
         @name = name
         @city = city
+        @street = street
         save
     end
 
@@ -38,16 +39,20 @@ class Brewery
         end
     end
 
+    def self.find_brewery_street(name)
+        bewery_name = self.all.find {|brewery| brewery.name == name}
+        address = brewery_name.street
+        puts "#{address}"
+    end
+
     def brewery_details(brewery)
-        puts ""
+        puts "" 
         puts ""
         puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         puts "Name: #{brewery.name}"
         puts "City: #{brewery.city}"
-        puts "State: #{brewery.state}"
+        puts "Street: #{brewery.street}"
         puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-
-        menu
     end 
 
 

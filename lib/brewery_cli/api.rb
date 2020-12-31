@@ -10,7 +10,7 @@ class API
         # binding.pry
         breweries_array = JSON.parse(response)
         breweries_array.each do |brewery|
-            Brewery.new(brewery["name"], brewery["city"])
+            Brewery.new(brewery["name"], brewery["city"], brewery["street"])
         end
     end     
 
