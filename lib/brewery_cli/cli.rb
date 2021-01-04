@@ -47,7 +47,7 @@ class CLI
             brewery_select
         elsif selection == 'exit'
             #puts a goodbye statement
-            goodbpye
+            goodbye
         else
             #invalid output, make user select again
             invalid
@@ -82,11 +82,11 @@ class CLI
         input = gets.strip.to_i
         if input.between?(1, sorted_city.count)
             @selected_city = sorted_city[input - 1]
+            display_breweries
         else
             puts "Looks like that was an invalid choice, would you like to try again?"
             invalid_city_select
         end
-        display_breweries
     end
 
     def display_breweries
@@ -111,9 +111,9 @@ class CLI
     def correct_choice
         puts "Would you like to see another Brewery? Type 'yes' or 'exit'" 
         input = gets.strip
-        if input == "yes"
+        if input == 'yes'
             brewery_city
-        elsif input == "exit"
+        elsif input == 'exit'
             goodbye
         else 
             puts "Sorry not a valid statement"
@@ -134,10 +134,12 @@ class CLI
     end
 
     def goodbye
+        puts " "
         puts "See you there!"
     end
 
     def invalid
+        puts " "
         puts "Cheers, but I think you made a typo there!"
         greet
     end
