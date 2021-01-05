@@ -3,6 +3,7 @@ GEM
   specs:
     awesome_print (1.8.0)
     coderay (1.1.3)
+    colorize (0.8.1)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     http-accept (1.7.0)
@@ -32,6 +33,7 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_print
+  colorize
   json
   pry
   rake (~> 12.0)

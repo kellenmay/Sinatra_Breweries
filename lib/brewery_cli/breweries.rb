@@ -12,13 +12,6 @@ class Brewery
         save
     end
 
-    # def initialize(brewery_hash)
-    #     brewery_hash.each do |k, v|
-    #         self.send("#{k}=", v) if self.respond_to?("#{k}=")
-    #    end 
-    #         save
-    # end
-
 
     def save #each new object is saved in the @@all array
         @@all << self
@@ -44,16 +37,6 @@ class Brewery
         address = brewery_name.street
         puts "#{address}"
     end
-
-    def brewery_details(brewery)
-        puts "" 
-        puts ""
-        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-        puts "Name: #{brewery.name}"
-        puts "City: #{brewery.city}"
-        puts "Street: #{brewery.street}"
-        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-    end 
 
 
 

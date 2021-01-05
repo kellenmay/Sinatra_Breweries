@@ -8,12 +8,15 @@
 class CLI
 
     def start
+        # puts String.colors
+        # puts String.modes
+        # puts String.color_samples
         puts " "
-        puts "Here is a list of breweries, trying to find one nearby?"
+        puts "Here is a list of breweries, trying to find one nearby?".cyan
         puts " "
         puts " "
-        puts "Let's start with your name:"
-        puts " "
+        puts "Let's start with your name:                            ".cyan
+        puts " "    
         name_greeting(user_input)
     end
 
@@ -22,28 +25,21 @@ class CLI
     end
 
     def name_greeting(name)
-        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         puts " "
-        puts "Hey there #{name}!"
-        puts " "
+        puts "Hey there #{name}!".cyan
+        puts "  ".cyan
         greet
     end
 
     def greet
-        puts "If you would like to see a list of breweries in NJ type 'list', if you don't want to see the list you can type 'exit'"
+        puts "Would like to see a list of breweries in NJ type".cyan + " 'list' ".white + "or if you don't want to see the list you can type".cyan + " 'exit'.".white
         list
     end 
 
     def list
         selection = user_input
-        # puts "#{selection}"
-        # Brewery.find_brewery(selection)
         if selection == 'list'
             brewery_city
-            #method for selecting a brewery
-            # #print the brewery (and brewery_street in that city)
-            # brewery_select
-            # correct_choice
         elsif selection == 'exit'
             goodbye
         else
@@ -53,9 +49,9 @@ class CLI
 
     def brewery_city
         sorted_city.each.with_index(1) do |brewery, i|
-            puts "#{i}. #{brewery.city}"
+            puts "#{i}. #{brewery.city}".cyan
         end  
-         puts "Where would you like to go?" 
+         puts "Where would you like to go?".cyan
          city_select 
     end
 
@@ -64,7 +60,7 @@ class CLI
         if input.between?(1, sorted_city.count)
             @selected_city = sorted_city[input - 1]
         else
-            puts "Looks like that was an invalid choice, would you like to try again?"
+            puts "Looks like that was an invalid choice, would you like to try again?".cyan
             invalid_city_select
         end
         display_breweries
@@ -72,40 +68,43 @@ class CLI
 
     def display_breweries
         Brewery.town_breweries(@selected_city.city).each.with_index(1) do |brewery, i|
-            puts "#{i}. #{brewery.name}"
+            puts "#{i}. #{brewery.name}".cyan
         end
         brewery_select 
         correct_choice
     end 
 
+
     def brewery_select
         input = gets.strip.to_i
         address = Brewery.town_breweries(@selected_city.city)[input - 1].street
         if address == ""
-            puts "Sorry we don't have that address on file!"
-            # correct_choice
+            puts "Sorry we don't have that address on file!".cyan
+            display_breweries
+        elsif input == 0
+            puts "Sorry that seems to be an invalid response. Please try again.".cyan
+            display_breweries
         else
-            puts "#{address}"
-            # correct_choice
+            puts "#{address}".cyan
         end
-    end
-    
+    end 
+
     def correct_choice
-        puts "Would you like to see another Brewery? Type 'yes' or 'exit'" 
+        puts "Would you like to see another Brewery? Type".cyan + " 'yes' ".white + "or".cyan + " 'exit'".white
         input = gets.strip
         if input == "yes"
             brewery_city
         elsif input == "exit"
             goodbye
         else 
-            puts "Sorry not a valid statement"
+            puts "Sorry not a valid statement".cyan
             correct_choice
         end 
     end
 
     def brewery_name
         Brewery.each.with_index(1) do |brewery, i|
-            puts "#{i}. #{brewery.name}"
+            puts "#{i}. #{brewery.name}".cyan
          end
     end
     
@@ -120,7 +119,7 @@ class CLI
     end   
          
     def invalid_city_select
-            puts "Try 'yes' to see the list again and 'no' to exit"
+            puts "Try".cyan + " 'yes' ".white + "to see the list again and".cyan + " 'no' ".white + "to exit".cyan
             input = gets.strip
         if input == 'yes'
            	list
@@ -132,15 +131,19 @@ class CLI
     end
 
     def invalid
-        puts "Cheers, but I think you made a typo there!"
+        puts "Cheers, but I think you made a typo there!".cyan
         greet
     end
 
     def goodbye
-        puts "See you there!"
+        begin
+            exit!
+        rescue SystemExit          
+            puts "See you there!".cyan
+        end
     end
 
 
 
-    
+
 end
