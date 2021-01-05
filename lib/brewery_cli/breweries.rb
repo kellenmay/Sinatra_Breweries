@@ -12,11 +12,9 @@ class Brewery
         save
     end
 
-
     def save #each new object is saved in the @@all array
         @@all << self
     end
-
 
     def self.all
         @@all

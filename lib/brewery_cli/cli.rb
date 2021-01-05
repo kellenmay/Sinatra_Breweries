@@ -8,14 +8,11 @@
 class CLI
 
     def start
-        # puts String.colors
-        # puts String.modes
-        # puts String.color_samples
         puts " "
         puts "Here is a list of breweries, trying to find one nearby?".cyan
         puts " "
         puts " "
-        puts "Let's start with your name:                            ".cyan
+        puts "Let's start with your name:".cyan
         puts " "    
         name_greeting(user_input)
     end
@@ -27,17 +24,17 @@ class CLI
     def name_greeting(name)
         puts " "
         puts "Hey there #{name}!".cyan
-        puts "  ".cyan
+        puts "  "   
         greet
     end
 
     def greet
-        puts "Would like to see a list of breweries in NJ type".cyan + " 'list' ".white + "or if you don't want to see the list you can type".cyan + " 'exit'.".white
+        puts "Would like to see a list of cities that have brewies in NJ type".cyan + " 'list' ".white + "or if you don't want to see the list you can type".cyan + " 'exit'.".white
         list
     end 
 
     def list
-        selection = user_input
+        selection = gets.strip
         if selection == 'list'
             brewery_city
         elsif selection == 'exit'
@@ -59,11 +56,11 @@ class CLI
         input = gets.strip.to_i
         if input.between?(1, sorted_city.count)
             @selected_city = sorted_city[input - 1]
+            display_breweries
         else
             puts "Looks like that was an invalid choice, would you like to try again?".cyan
             invalid_city_select
         end
-        display_breweries
     end
 
     def display_breweries
@@ -71,16 +68,14 @@ class CLI
             puts "#{i}. #{brewery.name}".cyan
         end
         brewery_select 
-        correct_choice
     end 
-
 
     def brewery_select
         input = gets.strip.to_i
         address = Brewery.town_breweries(@selected_city.city)[input - 1].street
         if address == ""
             puts "Sorry we don't have that address on file!".cyan
-            display_breweries
+            correct_choice
         elsif input == 0
             puts "Sorry that seems to be an invalid response. Please try again.".cyan
             display_breweries
@@ -110,7 +105,6 @@ class CLI
     
     def brewery_street
         input = gets.strip.to_i
-        # Brewery.all.find_brewery_street(name)
     end
 
     def sorted_city
@@ -119,13 +113,13 @@ class CLI
     end   
          
     def invalid_city_select
-            puts "Try".cyan + " 'yes' ".white + "to see the list again and".cyan + " 'no' ".white + "to exit".cyan
-            input = gets.strip
+        input = gets.strip
         if input == 'yes'
-           	list
-        elsif input == 'no'
+               brewery_city
+        elsif input == 'exit'
             goodbye
         else 
+            puts "Try again"
             invalid_city_select
         end
     end
@@ -136,12 +130,10 @@ class CLI
     end
 
     def goodbye
-        begin
-            exit!
-        rescue SystemExit          
-            puts "See you there!".cyan
-        end
+        puts "See you there!".cyan
     end
+
+
 
 
 
