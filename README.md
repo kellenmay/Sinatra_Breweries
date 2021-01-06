@@ -1,5 +1,14 @@
 # first_project
 
+## Short description:
 In this CLI you will be able to look through the towns of NJ to find a brewery of your choice!
 
-To install this project you will need to fork it from github, once forked you will need make sure you are in the correct directory and run git clone 'paste link here' and the project should now be in your control! You will need to then open the terminal the project and install the gems by running 'bundle'
+## Install instructions:
+In your terminal, just copy and paste the following: git clone git@github.com:kellenmay/first_project.git
+Then type cd first_project.
+
+## A contributor's guide:
+Any pull requests can be done at https://github.com/kellenmay/first_project
+
+## License:
+This program is available for reuse as open source under the terms in the MIT License found here https://opensource.org/licenses/MIT.
