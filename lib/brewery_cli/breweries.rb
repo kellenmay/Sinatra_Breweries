@@ -1,3 +1,8 @@
+# git init
+# git add .
+# git commit -m update
+# git push
+
 class Brewery
 
     @@all = []
