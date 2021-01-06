@@ -47,23 +47,24 @@ class CLI
     def brewery_city
         sorted_city.each.with_index(1) do |brewery, i|
             puts "#{i}. #{brewery.city}".cyan
-        end  
-         puts "Where would you like to go?".cyan
-         city_select 
+        end 
+         city_select
     end
 
     def city_select
+        puts "Using the corresponding number of the city, where would you like to go?".cyan
         input = gets.strip.to_i
         if input.between?(1, sorted_city.count)
             @selected_city = sorted_city[input - 1]
             display_breweries
         else
-            puts "Looks like that was an invalid choice, would you like to try again?".cyan
+            puts "Looks like that was an invalid choice, would you like to try again?".cyan + " 'yes'" + " or ".cyan + "'exit'" 
             invalid_city_select
         end
     end
 
     def display_breweries
+        puts "Using the corresponding number of the brewery, where would you like to go?".cyan
         Brewery.town_breweries(@selected_city.city).each.with_index(1) do |brewery, i|
             puts "#{i}. #{brewery.name}".cyan
         end
@@ -81,6 +82,7 @@ class CLI
             display_breweries
         else
             puts "#{address}".cyan
+            correct_choice
         end
     end 
 
