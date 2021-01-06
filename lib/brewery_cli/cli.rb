@@ -9,11 +9,9 @@ class CLI
 
     def start
         puts " "
-        puts "Here is a list of breweries, trying to find one nearby?".cyan
+        puts "Looks like you're trying to grab a beer, let me tell you where you can find some local breweries!".cyan
         puts " "
-        puts " "
-        puts "Let's start with your name:".cyan
-        puts " "    
+        puts "Would you mind telling me your name?".cyan
         name_greeting(user_input)
     end
 
@@ -23,17 +21,21 @@ class CLI
 
     def name_greeting(name)
         puts " "
-        puts "Hey there #{name}!".cyan
-        puts "  "   
+        puts "Welcome ".cyan + "#{name}" + "! I hope I can help you find what you're looking for!".cyan
+        puts "  " 
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~".cyan
+        puts " "  
         greet
     end
 
     def greet
         puts "Would like to see a list of cities that have brewies in NJ type".cyan + " 'list' ".white + "or if you don't want to see the list you can type".cyan + " 'exit'.".white
+        puts " "
         list
     end 
 
     def list
+        puts " "
         selection = gets.strip
         if selection == 'list'
             brewery_city
@@ -52,6 +54,7 @@ class CLI
     end
 
     def city_select
+        puts " "
         puts "Using the corresponding number of the city, where would you like to go?".cyan
         input = gets.strip.to_i
         if input.between?(1, sorted_city.count)
@@ -64,6 +67,7 @@ class CLI
     end
 
     def display_breweries
+        puts " "
         puts "Using the corresponding number of the brewery, where would you like to go?".cyan
         Brewery.town_breweries(@selected_city.city).each.with_index(1) do |brewery, i|
             puts "#{i}. #{brewery.name}".cyan
@@ -81,12 +85,14 @@ class CLI
             puts "Sorry that seems to be an invalid response. Please try again.".cyan
             display_breweries
         else
-            puts "#{address}".cyan
+            puts " "
+            puts "#{address}".blue 
             correct_choice
         end
     end 
 
     def correct_choice
+        puts " "
         puts "Would you like to see another Brewery? Type".cyan + " 'yes' ".white + "or".cyan + " 'exit'".white
         input = gets.strip
         if input == "yes"
