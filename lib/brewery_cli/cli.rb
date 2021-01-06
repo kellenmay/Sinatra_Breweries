@@ -134,7 +134,7 @@ class CLI
             goodbye
         else 
             puts " "
-            puts "Try again"
+            puts "Try again".cyan
             puts " "
             invalid_city_select
         end
