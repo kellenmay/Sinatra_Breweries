@@ -35,7 +35,6 @@ class CLI
     end 
 
     def list
-        puts " "
         selection = gets.strip
         if selection == 'list'
             brewery_city
@@ -61,6 +60,7 @@ class CLI
             @selected_city = sorted_city[input - 1]
             display_breweries
         else
+            puts " "
             puts "Looks like that was an invalid choice, would you like to try again?".cyan + " 'yes'" + " or ".cyan + "'exit'" 
             invalid_city_select
         end
@@ -69,6 +69,7 @@ class CLI
     def display_breweries
         puts " "
         puts "Using the corresponding number of the brewery, where would you like to go?".cyan
+        puts " "
         Brewery.town_breweries(@selected_city.city).each.with_index(1) do |brewery, i|
             puts "#{i}. #{brewery.name}".cyan
         end
@@ -79,10 +80,14 @@ class CLI
         input = gets.strip.to_i
         address = Brewery.town_breweries(@selected_city.city)[input - 1].street
         if address == ""
-            puts "Sorry we don't have that address on file!".cyan
+            puts " "
+            puts "Sorry we don't have that address on file!".blue
+            puts " "
             correct_choice
         elsif input == 0
+            puts " "
             puts "Sorry that seems to be an invalid response. Please try again.".cyan
+            puts " "
             display_breweries
         else
             puts " "
@@ -100,6 +105,7 @@ class CLI
         elsif input == "exit"
             goodbye
         else 
+            puts " "
             puts "Sorry not a valid statement".cyan
             correct_choice
         end 
@@ -127,17 +133,22 @@ class CLI
         elsif input == 'exit'
             goodbye
         else 
+            puts " "
             puts "Try again"
+            puts " "
             invalid_city_select
         end
     end
 
     def invalid
+        puts " "
         puts "Cheers, but I think you made a typo there!".cyan
+        puts " "
         greet
     end
 
     def goodbye
+        puts " "
         puts "See you there!".cyan
     end
 
