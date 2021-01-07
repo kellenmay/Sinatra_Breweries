@@ -6,8 +6,6 @@
 # git push
 
 class API
-
-
     def self.get_data
         response = RestClient.get('https://api.openbrewerydb.org/breweries?by_state=new_jersey&per_page=50')
         #binding.pry
@@ -15,8 +13,6 @@ class API
         breweries_array.each do |brewery|
             Brewery.new(brewery["name"], brewery["city"], brewery["street"])
         end
+        # binding.pry
     end     
-
-
-
 end

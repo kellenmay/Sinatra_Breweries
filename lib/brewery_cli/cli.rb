@@ -78,23 +78,29 @@ class CLI
 
     def brewery_select
         input = gets.strip.to_i
-        address = Brewery.town_breweries(@selected_city.city)[input - 1].street
-        if address == ""
-            puts " "
-            puts "Sorry we don't have that address on file!".blue
-            puts " "
-            correct_choice
-        elsif input == 0
+        if input.between?(0, Brewery.town_breweries(@selected_city.city).length)
+            address = Brewery.town_breweries(@selected_city.city)[input - 1].street
+                if address == ""
+                    puts " "
+                    puts "Sorry we don't have that address on file!".blue
+                    puts " "
+                    correct_choice
+                else
+                    puts " "
+                    puts "#{address}".blue 
+                    correct_choice
+                end
+        else
+            incorrect_brewey_select #couldn't get it to exit on the first try without this method 
+        end
+    end 
+
+    def incorrect_brewey_select
             puts " "
             puts "Sorry that seems to be an invalid response. Please try again.".cyan
             puts " "
             display_breweries
-        else
-            puts " "
-            puts "#{address}".blue 
-            correct_choice
-        end
-    end 
+    end
 
     def correct_choice
         puts " "
