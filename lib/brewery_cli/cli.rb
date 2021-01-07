@@ -71,7 +71,7 @@ class CLI
         puts "Using the corresponding number of the brewery, where would you like to go?".cyan
         puts " "
         Brewery.town_breweries(@selected_city.city).each.with_index(1) do |brewery, i|
-            puts "#{i}. #{brewery.name}".blue
+            puts "#{i}. #{brewery.name}".cyan
         end
         brewery_select 
     end 
