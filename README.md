@@ -6,6 +6,7 @@ In this CLI you will be able to look through the towns of NJ to find a brewery o
 ## Install instructions:
 In your terminal, just copy and paste the following: git clone git@github.com:kellenmay/first_project.git
 Then type 'cd first_project' to entire into the first_project folder.
+Run 'bundle' in your terminal to install the gems assocaited with this project.
 
 ## A contributor's guide:
 Any pull requests can be done at https://github.com/kellenmay/first_project
